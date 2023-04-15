@@ -19,15 +19,15 @@ public class RateLimitController {
         return "444服务不可用";
     }
 
-//    @GetMapping("/rateLimit/byUrl")
-//    @SentinelResource(value = "byUrl")
-//    public String byUrl() {
-//        return "按url限流测试OK";
-//    }
+    @GetMapping("/rateLimit/byUrl")
+    @SentinelResource(value = "byUrl")
+    public String byUrl() {
+        return "按url限流测试OK";
+    }
 
     @GetMapping("/rateLimit/customerBlockHandler")
     @SentinelResource(value = "customerBlockHandler", blockHandlerClass = CustomerBlockHandler.class, blockHandler = "handlerException2")
-    public String customerBlockHandler() {
+    public String customerBlockHandler() { // @SentinelResource和@HystrixCommand的作用是类似的，都是来指定流控或降级时返回的信息
         return "200按客户自定义";
     }
 }
